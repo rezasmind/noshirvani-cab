@@ -3,10 +3,12 @@ from selenium.webdriver.common.keys import Keys
 from time import sleep
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 
-driver = webdriver.Chrome(executable_path='/home/daddy/chromedriver')
+
+driver = webdriver.Chrome(executable_path='./chromedriver.exe')
 
 # Navigate to page
 
@@ -28,3 +30,12 @@ sleep(7)
 cab = driver.find_element(By.CLASS_NAME,"fa-sign-in")
 cab.click()
 
+sleep(7)
+
+print(driver.title)
+
+window_after = driver.window_handles[1]
+driver.switch_to.window(window_after)
+
+sleep(20)
+ActionChains(driver).send_keys(Keys.RETURN).perform()
