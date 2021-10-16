@@ -16,10 +16,15 @@ sleep(2)
 driver.get('http://elearning1.nit.ac.ir/') 
 print(driver.title)
 sleep(12)
+
 username = driver.find_element(By.ID,"username")
 password = driver.find_element(By.ID,"password")
 
-username.send_keys("username")
-password.send_keys("password")
+username.send_keys("993212008")
+password.send_keys("Reza0019")
 password.send_keys(Keys.RETURN)
+
+sleep(7)
+cab = driver.find_element(By.CLASS_NAME,"fa-sign-in")
+cab.click()
 
