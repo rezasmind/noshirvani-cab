@@ -4,6 +4,15 @@ from time import sleep
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
+import os
+from dotenv import load_dotenv , find_dotenv
+
+
+load_dotenv(find_dotenv())
+
+KALAMEKARBARI = os.getenv('KALAMEKARBARI')
+RAMZ = os.getenv('RAMZ')
+
 
 
 
@@ -22,8 +31,8 @@ sleep(12)
 username = driver.find_element(By.ID,"username")
 password = driver.find_element(By.ID,"password")
 
-username.send_keys("993212008")
-password.send_keys("Reza0019")
+username.send_keys(KALAMEKARBARI)
+password.send_keys(RAMZ)
 password.send_keys(Keys.RETURN)
 
 sleep(7)
