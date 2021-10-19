@@ -6,6 +6,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 import os
 from dotenv import load_dotenv , find_dotenv
+import csv
+import time
 
 
 load_dotenv(find_dotenv())
@@ -14,6 +16,31 @@ KALAMEKARBARI = os.getenv('KALAMEKARBARI')
 RAMZ = os.getenv('RAMZ')
 
 
+def hourdata():
+    with open('hour.csv', 'w') as csvfile:
+        w = csv.writer(csvfile,quoting=csv.QUOTE_NONE,escapechar=' ')
+        save = "y"
+        while save == "y":
+            shanbe = list(map(str,input("(shanbe) saeat kelas haton ro ezafe konid (besorat => 16:00 , 13:00,...): ").split(" "))) 
+            yekshan = list(map(str,input("(Yek shanbe) saeat kelas haton ro ezafe konid (besorat => 16:00 , 13:00,...): ").split(" ")))  
+            doshan = list(map(str,input("(Do shanbe) saeat kelas haton ro ezafe konid (besorat => 16:00 , 13:00,...): ").split(" ")))  
+            seshan = list(map(str,input("(Se shanbe) saeat kelas haton ro ezafe konid (besorat => 16:00 , 13:00,...): ").split(" ")))   
+            chaharshan = list(map(str,input("(Chahar shanbe) saeat kelas haton ro ezafe konid (besorat => 16:00 , 13:00,...): ").split(" ")))  
+            times = (shanbe,yekshan,doshan,seshan,chaharshan)
+ 
+
+
+            save = input("mikhaid saeat haie vared shode ro zakhire konid? Y/N: ")  
+            if save.lower() == "y":
+                w.writerow([times])   
+                print("---saeat haie vared shode zakhire shode---")
+
+            save = input("mikhaid dobare vared konid?? Y/N: ")
+            
+
+        print("etmam zakhire sazi data.")
+
+hourdata()
 
 
 
