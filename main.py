@@ -7,13 +7,27 @@ from selenium.webdriver.common.action_chains import ActionChains
 import os
 from dotenv import load_dotenv , find_dotenv
 import csv
-import time
+import datetime
+
+days = {"Saturday":0,"Sunday":2,"Monday":4,"Tuesday":6,"Wednesday":8}
+
+day = datetime.datetime.now().strftime("%A")
+currentTime = datetime.datetime.now().strftime("%H:%M")
 
 
 load_dotenv(find_dotenv())
 
 KALAMEKARBARI = os.getenv('KALAMEKARBARI')
 RAMZ = os.getenv('RAMZ')
+
+def dayCheck():
+    return day in days.keys();
+
+while True:
+    if(dayCheck() == True):
+        break;        
+    else:
+        sleep(21600)
 
 if(os.path.exists("./hour.csv") == False):
     def hourdata():
@@ -35,8 +49,15 @@ if(os.path.exists("./hour.csv") == False):
                 save = input("mikhaid dobare vared konid?? Y/N: ")
             print("etmam zakhire sazi data.")
     hourdata()
-
-
+else:
+    def imprtHours():
+        with open("hour.csv","r") as f:
+            r = csv.reader(f)
+            times = []
+            hours = []
+            for i in r:
+                times.append(i)
+            hours.append(times[days[day]])
 
 def attendClass():
     driver = webdriver.Chrome(executable_path='./chromedriver.exe')
@@ -73,3 +94,12 @@ def attendClass():
 
     sleep(5400)
     driver.quit()
+
+
+while True:
+    sleep(60)
+    if(currentTime in hours):
+        attendClass()
+    else:
+        continue;
+    
